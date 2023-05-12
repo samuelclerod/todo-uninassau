@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { View, Text, Alert } from 'react-native'
-import { styles } from './styles'
 
 import { Header } from '../../components/Header'
 import { Form } from '../../components/Form'
-import { useState } from 'react'
-import { TaskItem } from '../../components/Task'
+import { TaskList } from '../../components/TaskList'
+import { EmptyState } from '../../components/EmptyState'
+
+import { styles } from './styles'
+import { DateTime } from 'luxon'
 
 export function Home() {
   const [tasks, setTasks] = useState([])
@@ -20,7 +23,15 @@ export function Home() {
       return
     }
 
-    const newTasks = [...tasks, text]
+    const task = {
+      id: DateTime.now().toString(),
+      description: text,
+      completed: false,
+    }
+
+    console.log(task)
+
+    const newTasks = [...tasks, task]
 
     setTasks(newTasks)
   }
@@ -29,11 +40,11 @@ export function Home() {
     <View style={styles.container}>
       <Header />
 
-      <Form placeholder="Digite uma task" onAdd={handleAdd} />
+      <View style={styles.content}>
+        <Form placeholder="Digite uma task" onAdd={handleAdd} />
 
-      {tasks.map((task) => (
-        <TaskItem task={task} />
-      ))}
+        {tasks.length ? <TaskList tasks={tasks} /> : <EmptyState />}
+      </View>
     </View>
   )
 }

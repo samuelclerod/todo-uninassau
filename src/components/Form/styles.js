@@ -4,10 +4,10 @@ import { colors } from '../../constants'
 
 export const styles = StyleSheet.create({
   form: {
+    marginTop: -24,
     width: '100%',
     flexDirection: 'row',
-    paddingHorizontal: 24,
-    marginBottom: 42
+    marginBottom: 42,
   },
   input: {
     flex: 1,
@@ -24,20 +24,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: colors.blue,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-

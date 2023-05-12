@@ -1,15 +1,19 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import { colors } from '../../constants'
 
 export const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: colors.gray[600],
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   containerText: {
-    color: colors.gray[300]
-  }
+    color: colors.gray[300],
+  },
+  content: {
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
 })
