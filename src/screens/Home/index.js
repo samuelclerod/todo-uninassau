@@ -4,7 +4,6 @@ import { View, Text, Alert } from 'react-native'
 import { Header } from '../../components/Header'
 import { Form } from '../../components/Form'
 import { TaskList } from '../../components/TaskList'
-import { EmptyState } from '../../components/EmptyState'
 
 import { styles } from './styles'
 import { DateTime } from 'luxon'
@@ -29,9 +28,17 @@ export function Home() {
       completed: false,
     }
 
-    console.log(task)
-
     const newTasks = [...tasks, task]
+
+    setTasks(newTasks)
+  }
+
+  function handleCheck(id) {
+    newTasks = [...tasks]
+
+    const task = tasks.find((task) => task.id === id)
+
+    task.completed = !task.completed
 
     setTasks(newTasks)
   }
@@ -40,10 +47,10 @@ export function Home() {
     <View style={styles.container}>
       <Header />
 
-      <View style={styles.content}>
-        <Form placeholder="Digite uma task" onAdd={handleAdd} />
+      <Form placeholder="Digite uma task" onAdd={handleAdd} />
 
-        {tasks.length ? <TaskList tasks={tasks} /> : <EmptyState />}
+      <View style={styles.content}>
+        <TaskList tasks={tasks} onCheck={handleCheck} />
       </View>
     </View>
   )

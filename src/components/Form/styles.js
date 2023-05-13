@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     marginBottom: 42,
+    paddingHorizontal: 24,
   },
   input: {
     flex: 1,

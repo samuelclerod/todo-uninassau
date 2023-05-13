@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     color: colors.gray[300],
   },
   content: {
+    flex: 1,
+    width: '100%',
     alignItems: 'center',
-    paddingHorizontal: 24,
   },
 })

@@ -5,7 +5,7 @@ import { styles } from './styles'
 export const EmptyState = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/icons/clipboard.png')} />
+      <Image source={require('../../../../assets/icons/clipboard.png')} />
       <Text style={styles.title}>Você ainda não tem tarefas cadastradas</Text>
       <Text style={styles.subtitle}>
         Crie tarefas e organize seus itens a fazer!
