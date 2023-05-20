@@ -37,20 +37,43 @@ export function Home() {
     newTasks = [...tasks]
 
     const task = tasks.find((task) => task.id === id)
+    if (!task) {
+      return
+    }
 
     task.completed = !task.completed
 
     setTasks(newTasks)
   }
 
+  function handleRemove(id) {
+    const confirm = {
+      text: 'sim',
+      onPress: () => {
+        const updatedTasks = tasks.filter((task) => task.id !== id)
+        setTasks(updatedTasks)
+      },
+    }
+
+    const cancel = {
+      text: 'não',
+      style: 'cancel',
+    }
+
+    Alert.alert('Remover tarefa', 'Certeza que deseja apagar?', [
+      confirm,
+      cancel,
+    ])
+  }
+
   return (
     <View style={styles.container}>
       <Header />
 
-      <Form placeholder="Digite uma task" onAdd={handleAdd} />
+      <Form placeholder="Digite uma task" onSubmit={handleAdd} />
 
       <View style={styles.content}>
-        <TaskList tasks={tasks} onCheck={handleCheck} />
+        <TaskList onCheck={handleCheck} onRemove={handleRemove} tasks={tasks} />
       </View>
     </View>
   )

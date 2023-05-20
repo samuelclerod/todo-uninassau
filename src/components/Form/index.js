@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Image } from 'react-native'
 import { colors } from '../../constants'
 import { styles } from './styles'
 
-export const Form = ({ placeholder, onAdd }) => {
+export const Form = ({ placeholder, onSubmit }) => {
   const [text, setText] = useState()
 
   const onChangeInput = (value) => {
@@ -11,7 +11,7 @@ export const Form = ({ placeholder, onAdd }) => {
   }
 
   const handleAddTask = () => {
-    onAdd(text.trim())
+    onSubmit(text.trim())
     setText('')
   }
 

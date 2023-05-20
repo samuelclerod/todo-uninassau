@@ -5,7 +5,7 @@ import { FlatList, View, StyleSheet } from 'react-native'
 
 import { EmptyState } from './EmptyState'
 
-export const TaskList = ({ tasks, onCheck }) => {
+export const TaskList = ({ tasks, onCheck, onRemove }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -16,7 +16,7 @@ export const TaskList = ({ tasks, onCheck }) => {
             data={tasks}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <TaskItem task={item} onCheck={onCheck} />
+              <TaskItem task={item} onCheck={onCheck} onRemove={onRemove} />
             )}
           />
         )}

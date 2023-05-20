@@ -14,7 +14,7 @@ const CheckButton = ({ onPress, checked }) => {
   )
 }
 
-export const TaskItem = ({ task, onCheck }) => {
+export const TaskItem = ({ task, onCheck, onRemove }) => {
   const textStyle = task.completed
     ? {
         ...styles.taskText,
@@ -29,7 +29,7 @@ export const TaskItem = ({ task, onCheck }) => {
 
       <Text style={textStyle}>{task.description}</Text>
 
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => onRemove(task.id)}>
         <Image source={require('../../../../assets/icons/trash.png')} />
       </TouchableOpacity>
     </View>
