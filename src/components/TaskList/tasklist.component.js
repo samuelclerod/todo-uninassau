@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { TaskItem } from './Task'
 import { FlatList, View, StyleSheet } from 'react-native'
 
 import { EmptyState } from './EmptyState'
 import { Info } from './Info'
+import { TaskContext } from '../../containers/TaskProvider'
 
-export const TaskList = ({ tasks, onCheck, onRemove }) => {
+export const TaskList = () => {
+  const { tasks } = useContext(TaskContext)
+
   const isEmpty = tasks.length === 0
 
   return (
@@ -19,9 +22,7 @@ export const TaskList = ({ tasks, onCheck, onRemove }) => {
           <FlatList
             data={tasks}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TaskItem task={item} onCheck={onCheck} onRemove={onRemove} />
-            )}
+            renderItem={({ item }) => <TaskItem task={item} />}
           />
         )}
       </View>

@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, TextInput, TouchableOpacity, Image } from 'react-native'
 import { colors } from '../../constants'
 import { styles } from './styles'
+import { TaskContext } from '../../containers/TaskProvider'
 
-export const Form = ({ placeholder, onSubmit }) => {
+export const Form = () => {
   const [text, setText] = useState()
+
+  const { handleAdd } = useContext(TaskContext)
 
   const onChangeInput = (value) => {
     setText(value)
   }
 
   const handleAddTask = () => {
-    onSubmit(text.trim())
+    handleAdd(text.trim())
     setText('')
   }
 
@@ -19,7 +22,7 @@ export const Form = ({ placeholder, onSubmit }) => {
     <View style={styles.form}>
       <TextInput
         style={styles.input}
-        placeholder={placeholder}
+        placeholder="Digite uma task"
         placeholderTextColor={colors.gray[300]}
         keyboardType="default"
         onChangeText={onChangeInput}
