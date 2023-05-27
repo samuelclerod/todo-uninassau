@@ -14,3 +14,5 @@ export const colors = {
   blueDark: '#1E6F9F',
   danger: '#E25858',
 }
+
+export const tasksKey = 'uninassau@tasks'

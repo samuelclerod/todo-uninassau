@@ -17,7 +17,7 @@ export const TaskList = ({ tasks, onCheck, onRemove }) => {
           <EmptyState />
         ) : (
           <FlatList
-            data={tasks.sort((a, b) => a.completed - b.completed)}
+            data={tasks}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TaskItem task={item} onCheck={onCheck} onRemove={onRemove} />

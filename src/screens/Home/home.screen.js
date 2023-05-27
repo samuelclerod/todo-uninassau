@@ -1,15 +1,32 @@
-import { useState } from 'react'
-import { View, Text, Alert } from 'react-native'
+import { useState, useEffect } from 'react'
+import { View, Alert } from 'react-native'
 
 import { Header } from '../../components/Header'
 import { Form } from '../../components/Form'
 import { TaskList } from '../../components/TaskList'
 
-import { styles } from './styles'
+import { styles } from './home.styles'
 import { DateTime } from 'luxon'
+
+import { save, load } from '../../storage'
+import { tasksKey } from '../../constants'
 
 export function Home() {
   const [tasks, setTasks] = useState([])
+
+  async function loadTasks() {
+    const tasksSalvas = await load(tasksKey)
+    setTasks(tasksSalvas)
+  }
+
+  async function saveTasks(tasksData) {
+    const ok = await save(tasksData, tasksKey)
+    if (ok) setTasks(tasksData)
+  }
+
+  useEffect(() => {
+    loadTasks()
+  }, []) // array vazio atualizar no primeiro carregamento
 
   function handleAdd(text = '') {
     const existsTask = tasks.includes(text)
@@ -30,7 +47,7 @@ export function Home() {
 
     const newTasks = [...tasks, task]
 
-    setTasks(newTasks)
+    saveTasks(newTasks)
   }
 
   function handleCheck(id) {
@@ -43,7 +60,7 @@ export function Home() {
 
     task.completed = !task.completed
 
-    setTasks(newTasks)
+    saveTasks(newTasks)
   }
 
   function handleRemove(id) {
@@ -51,7 +68,7 @@ export function Home() {
       text: 'sim',
       onPress: () => {
         const updatedTasks = tasks.filter((task) => task.id !== id)
-        setTasks(updatedTasks)
+        saveTasks(updatedTasks)
       },
     }
 
