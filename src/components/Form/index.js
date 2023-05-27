@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { View, TextInput, TouchableOpacity, Image } from 'react-native'
 import { colors } from '../../constants'
 import { styles } from './styles'
-import { TaskContext } from '../../containers/TaskProvider'
+import { useTasks } from '../../hooks/useTasks'
 
 export const Form = () => {
   const [text, setText] = useState()
 
-  const { handleAdd } = useContext(TaskContext)
+  const { handleAdd } = useTasks()
 
   const onChangeInput = (value) => {
     setText(value)

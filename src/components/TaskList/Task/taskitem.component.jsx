@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { colors } from '../../../constants'
-import { TaskContext } from '../../../containers/TaskProvider'
+import { useNavigation } from '@react-navigation/native'
+import { useTasks } from '../../../hooks/useTasks'
 
 const CheckButton = ({ id, checked }) => {
-  const { handleCheck } = useContext(TaskContext)
+  const { handleCheck } = useTasks()
 
   return (
     <TouchableOpacity onPress={() => handleCheck(id)}>
@@ -18,7 +19,7 @@ const CheckButton = ({ id, checked }) => {
 }
 
 const DeleteButton = ({ id }) => {
-  const { handleRemove } = useContext(TaskContext)
+  const { handleRemove } = useTasks()
   return (
     <TouchableOpacity onPress={() => handleRemove(id)}>
       <Image source={require('../../../../assets/icons/trash.png')} />
@@ -27,6 +28,8 @@ const DeleteButton = ({ id }) => {
 }
 
 export const TaskItem = ({ task }) => {
+  const { navigate } = useNavigation()
+
   const textStyle = task.completed
     ? {
         ...styles.taskText,
@@ -35,6 +38,10 @@ export const TaskItem = ({ task }) => {
       }
     : styles.taskText
 
+  const moveToDetails = () => {
+    navigate('Details', { task })
+  }
+
   return (
     <View style={styles.container}>
       <CheckButton id={task.id} checked={task.completed} />
@@ -42,6 +49,10 @@ export const TaskItem = ({ task }) => {
       <Text style={textStyle}>{task.description}</Text>
 
       <DeleteButton id={task.id} />
+
+      <TouchableOpacity onPress={moveToDetails}>
+        <Text>➡️</Text>
+      </TouchableOpacity>
     </View>
   )
 }

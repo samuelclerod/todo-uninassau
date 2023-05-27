@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { TaskItem } from './Task'
+import { TaskItem } from './Task/taskitem.component'
 import { FlatList, View, StyleSheet } from 'react-native'
 
 import { EmptyState } from './EmptyState'
 import { Info } from './Info'
-import { TaskContext } from '../../containers/TaskProvider'
+import { useTasks } from '../../hooks/useTasks'
 
 export const TaskList = () => {
-  const { tasks } = useContext(TaskContext)
+  const { tasks } = useTasks()
 
   const isEmpty = tasks.length === 0
 

@@ -82,11 +82,9 @@ export const TaskProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         tasks,
-        setTasks,
         handleAdd,
         handleCheck,
         handleRemove,
-        loadTasks,
       }}
     >
       {children}
